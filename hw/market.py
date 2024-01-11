@@ -1,4 +1,4 @@
-from hw.logger import log
+from hw.logger import time_log
 from datetime import datetime
 
 
@@ -7,7 +7,7 @@ class Market:
         self.wines = {} if wines is None else {wine.title: wine for wine in wines}
         self.beers = {} if beers is None else {beer.title: beer for beer in beers}
 
-    @log
+    @time_log
     def has_drink_with_title(self, title=None) -> bool:
         """
         Проверяет наличие напитка в магазине за О(1)
@@ -17,7 +17,7 @@ class Market:
         """
         return title in self.wines or title in self.beers
 
-    @log
+    @time_log
     def get_drinks_sorted_by_title(self) -> list:
         """
         Метод получения списка напитков (вина и пива) отсортированных по title
@@ -27,8 +27,8 @@ class Market:
         drinks = list(self.wines.values()) + list(self.beers.values())
         return sorted(drinks, key=lambda drink: drink.title)
 
-    @log
-    def get_drinks_by_production_date(self, from_date: datetime = None, to_date: datetime = None) -> list:
+    @time_log
+    def get_drinks_by_production_date(self, from_date: datetime, to_date: datetime) -> list:
         """
         Метод получения списка напитков в указанном диапазоне дат: с from_date по to_date
 
